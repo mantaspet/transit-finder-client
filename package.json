@@ -1,7 +1,7 @@
 {
   "name": "transit-finder-client",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -9,6 +9,13 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@material/button": "^0.41.0",
+    "@material/drawer": "^0.41.1",
+    "@material/elevation": "^0.41.0",
+    "@material/image-list": "^0.41.0",
+    "@material/list": "^0.41.0",
+    "@material/textfield": "^0.41.0",
+    "@material/typography": "^0.41.0",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
