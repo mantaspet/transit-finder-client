@@ -35,11 +35,13 @@ const actions = {
   loginWithFacebook({ commit }) {
     return new Promise((resolve, reject) => {
       FB.login((result) => {
+        console.log(result);
         if (result.authResponse) {
-          return axios.post('api/auth/facebook', { access_token: result.authResponse.accessToken })
+          return axios.post('auth/facebook', { access_token: result.authResponse.accessToken })
             .then((res) => {
               // TODO: needs work
-              const token = res.headers.get('x-auth-token');
+              console.log(res);
+              const token = res.headers['x-auth-token'];
               if (token) {
                 commit('setAccessToken', token);
                 localStorage.setItem('accessToken', token);
