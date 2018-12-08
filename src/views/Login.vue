@@ -3,6 +3,9 @@
   <button @click="loginWithFacebook">
     Prisijungti su Facebook
   </button>
+  <button @click="getFbUser">
+    Gauti FB useri
+  </button>
 </div>
 </template>
 
@@ -30,6 +33,18 @@ export default {
         console.log('User has been logged in');
         this.$router.replace({ name: 'home' });
       });
+    },
+
+    getFbUser() {
+      FB.api(
+        "/me?fields=link",
+        function (response) {
+          console.log(response);
+          if (response && !response.error) {
+
+          }
+        }
+      );
     },
   },
 };
