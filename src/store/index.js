@@ -10,8 +10,6 @@ export default new Vuex.Store({
   state: {
     appSettings: {
       sidenavOpen: true,
-      locale: 'lt',
-      localeIcon: require('@/assets/locale/lt-flag.png'), // 'require' is used to make v-img work with dynamic src attributes
     },
     confirmDialog: {
       isOpen: false,
@@ -49,10 +47,6 @@ export default new Vuex.Store({
     storeAppSettings(state, payload) {
       const appSettings = {
         sidenavOpen: payload.sidenavOpen === false ? payload.sidenavOpen : true,
-        locale: payload.locale ? payload.locale : 'lt',
-        localeIcon: payload.localeIcon
-          ? payload.localeIcon
-          : require('@/assets/locale/lt-flag.png'),
       };
       Vue.set(state, 'appSettings', appSettings);
       localStorage.setItem('appSettings', JSON.stringify(state.appSettings));
@@ -78,7 +72,9 @@ export default new Vuex.Store({
       state.confirmDialog = {
         isOpen: true,
         cancelText: payload.cancelText ? payload.cancelText : i18n.t('cancel'),
-        confirmText: payload.confirmText ? payload.confirmText : i18n.t('confirm'),
+        confirmText: payload.confirmText
+          ? payload.confirmText
+          : i18n.t('confirm'),
         body: payload.body ? payload.body : i18n.t('uncancellable_action'),
         title: payload.title ? payload.title : i18n.t('are_you_sure'),
       };

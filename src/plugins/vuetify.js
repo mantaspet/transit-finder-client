@@ -58,8 +58,7 @@ Vue.use(Vuetify, {
     transitions,
   },
   theme: {
-    primary: '#959b89',
-    accent: '#959b89',
+    primary: '#6200ee',
   },
   customProperties: true,
   iconfont: 'md',

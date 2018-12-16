@@ -1,10 +1,19 @@
 <template>
-  <v-toolbar style="z-index: 3" card app>
-    <v-toolbar-side-icon @click.native="toggleNavigationDrawer"/>
+  <v-toolbar app>
+    <v-toolbar-title>Tarpmiestinės kelionės</v-toolbar-title>
     <v-spacer></v-spacer>
 
-    <LanguageSelector/>
-    <v-menu bottom lazy offset-y>
+    <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn flat>
+        <v-icon class="mr-2">directions_car</v-icon>Kelionės
+      </v-btn>
+
+      <v-btn flat>
+        <v-icon class="mr-2">person</v-icon>Prisijungti su Facebook
+      </v-btn>
+    </v-toolbar-items>
+
+    <!-- <v-menu bottom lazy offset-y>
       <v-btn slot="activator" icon large>
         <v-icon large>account_circle</v-icon>
       </v-btn>
@@ -38,20 +47,15 @@
           <v-list-tile-title>{{ $t('logout') }}</v-list-tile-title>
         </v-list-tile>
       </v-list>
-    </v-menu>
+    </v-menu>-->
   </v-toolbar>
 </template>
 
 <script>
 /* eslint-disable global-require,import/no-unresolved */
-import LanguageSelector from './LanguageSelector.vue';
 
 export default {
   name: 'Toolbar',
-
-  components: {
-    LanguageSelector,
-  },
 
   computed: {
     currentUser() {
@@ -63,30 +67,6 @@ export default {
     logout() {
       this.$store.commit('logout');
     },
-
-    viewProfile() {
-      this.$router.push({ name: 'profile' });
-    },
-
-    stopImpersonating() {
-      this.$store.dispatch('stopImpersonating').then(() => {
-        this.$router.replace('/');
-      });
-    },
-
-    toggleNavigationDrawer() {
-      const isExpanded = this.$store.getters.appSettings.sidenavOpen;
-      this.$store.commit('updateAppSettings', {
-        key: 'sidenavOpen',
-        value: !isExpanded,
-      });
-    },
   },
 };
 </script>
-
-<style scoped>
-.v-list__tile__action {
-  min-width: 32px;
-}
-</style>

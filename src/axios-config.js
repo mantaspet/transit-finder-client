@@ -8,12 +8,16 @@ axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
 
 axios.interceptors.request.use((config) => {
   if (store.getters.isAuthenticated) {
-    config.headers.common.Authorization = `Bearer ${store.getters.auth.accessToken}`;
+    config.headers.common.Authorization = `Bearer ${
+      store.getters.auth.accessToken
+    }`;
   } else {
     router.push({ name: 'login' });
   }
   if (store.getters.auth.impersonatingAs) {
-    config.headers.common['Impersonating-As'] = `${store.getters.auth.impersonatingAs}`;
+    config.headers.common['Impersonating-As'] = `${
+      store.getters.auth.impersonatingAs
+    }`;
   }
   config.headers.common.Locale = store.getters.appSettings.locale;
   return config;
@@ -62,7 +66,9 @@ axios.interceptors.response.use(
           if (error.response.data.message.indexOf('login') > -1) {
             store.commit('logout');
           } else {
-            store.commit(mutation, { text: `${i18n.t('internal_server_error')}.` });
+            store.commit(mutation, {
+              text: `${i18n.t('internal_server_error')}.`,
+            });
           }
           throw error;
         }
