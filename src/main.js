@@ -1,23 +1,28 @@
 import Vue from 'vue';
-import axios from 'axios';
+import '@babel/polyfill';
+import './plugins/vuetify';
 import App from './App.vue';
-import router from './router';
+import router from './router/index';
 import store from './store/index';
-import './registerServiceWorker';
+import filters from './filters';
+import helpers from './helpers';
+import axios from './axios-config';
+import veeValidate from './vee-validate-config';
+import i18n from './i18n/i18n-config';
 
-Vue.config.productionTip = false;
-axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
-axios.interceptors.request.use((config) => {
-  const editedConfig = config;
-  if (store.getters.accessToken) {
-    editedConfig.headers.common['x-auth-token'] = `Bearer ${store.getters.accessToken}`;
-  }
-  return editedConfig;
+Vue.use(veeValidate, {
+  events: 'change',
 });
+Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
+Vue.prototype.$eventBus = new Vue();
+
+filters.registerFilters(Vue);
+helpers.registerHelpers(Vue);
 
 new Vue({
-  router,
   store,
+  i18n,
+  router,
   render: h => h(App),
 }).$mount('#app');
