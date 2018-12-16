@@ -25,7 +25,7 @@ axios.interceptors.response.use(
         }
         case 401: {
           store.commit(mutation, {
-            text: 'Turite prisijungti, kad atliktumėte šį veiksmą',
+            text: 'Prašome prisijungti',
           });
           store.dispatch('logout');
           throw error;

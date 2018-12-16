@@ -1,10 +1,12 @@
 /* eslint-disable no-shadow,consistent-return,prefer-promise-reject-errors,no-param-reassign,
 no-undef,function-paren-newline,arrow-parens,no-underscore-dangle */
 import axios from 'axios';
+import router from '../router/index';
 
 const state = {
   posts: [],
   post: {},
+  editedPost: {},
   dialog: false,
   index: -1,
   backendErrors: {
@@ -24,6 +26,9 @@ const getters = {
 
 const mutations = {
   storePosts(state, payload) {
+    payload.forEach((post) => {
+      post.date = post.date.slice(0, 10);
+    });
     state.posts = payload;
   },
 
@@ -36,18 +41,28 @@ const mutations = {
   },
 
   storePost(state, payload) {
+    payload.date = payload.date.slice(0, 10);
     state.post = payload;
   },
 
+  viewPost(state, payload) {
+    state.post = payload.post;
+    state.index = payload.index;
+    router.push(`/posts/${payload.post._id}`);
+  },
+
   postCreated(state, post) {
+    post.date = post.date.slice(0, 10);
     state.dialog = false;
     state.posts.push(post);
   },
 
   postUpdated(state, updatedPost) {
+    state.dialog = false;
+    updatedPost.date = updatedPost.date.slice(0, 10);
     const index = state.posts.findIndex((post) => post._id === updatedPost._id);
     state.posts.splice(index, 1, updatedPost);
-    state.dialog = false;
+    state.post = updatedPost;
   },
 
   postDeleted(state, index) {
@@ -55,7 +70,7 @@ const mutations = {
   },
 
   newPost(state) {
-    state.post = {};
+    state.editedPost = {};
     state.backendErrors = {
       from: [],
       to: [],
@@ -68,7 +83,7 @@ const mutations = {
   },
 
   editPost(state, payload) {
-    state.post = JSON.parse(JSON.stringify(payload.post));
+    state.editedPost = JSON.parse(JSON.stringify(payload.post));
     state.backendErrors = {
       from: [],
       to: [],
@@ -96,6 +111,19 @@ const actions = {
         .get('posts')
         .then((res) => {
           commit('storePosts', res.data);
+          resolve(res);
+        })
+        .catch(() => reject()),
+    );
+  },
+
+  getPost({ commit }, id) {
+    return new Promise((resolve, reject) =>
+      axios
+        .get(`posts/${id}`)
+        .then((res) => {
+          commit('storePost', res.data.post);
+          commit('storeComments', res.data.comments);
           resolve(res);
         })
         .catch(() => reject()),

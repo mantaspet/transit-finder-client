@@ -7,6 +7,7 @@
             <v-card
               slot-scope="{ hover }"
               :class="[`elevation-${hover ? 18 : 2}`, { 'clickable': hover }]"
+              @click.native="viewPost(post, index)"
             >
               <v-card-title class="title" style="font-size: 18px !important">
                 <v-icon class="mr-2">location_on</v-icon>
@@ -30,10 +31,10 @@
               </v-card-text>
               <v-card-actions v-if="$isCurrentUser(post.user._id)">
                 <v-spacer></v-spacer>
-                <v-btn icon @click="editPost(post, index)">
+                <v-btn icon @click.stop="editPost(post, index)">
                   <v-icon color="teal">edit</v-icon>
                 </v-btn>
-                <v-btn icon @click="deletePost(post, index)">
+                <v-btn icon @click.stop="deletePost(post, index)">
                   <v-icon color="teal">delete</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -54,7 +55,7 @@
       <PostForm :dialog="dialog" :index="index" :item="post"/>
     </v-dialog>
 
-    <v-scale-transition origin="center">
+    <v-scale-transition v-if="$store.getters.accessToken" origin="center">
       <v-btn
         v-if="showPrimaryBtn"
         fab
@@ -73,7 +74,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import PostForm from '../components/PostForm';
+import PostForm from '../components/PostForm.vue';
 
 export default {
   name: 'Posts',
@@ -91,12 +92,13 @@ export default {
   computed: mapState({
     dialog: (state) => state.posts.dialog,
     index: (state) => state.posts.index,
-    post: (state) => state.posts.post,
+    post: (state) => state.posts.editedPost,
     posts: (state) => state.posts.posts,
   }),
 
   created() {
     this.$store.dispatch('getPosts');
+    this.$store.commit('storeComments', []);
   },
 
   mounted() {
@@ -105,9 +107,23 @@ export default {
     }, 500);
   },
 
+  beforeRouteLeave(to, from, next) {
+    this.showPrimaryBtn = false;
+    setTimeout(() => {
+      next();
+    }, 300);
+  },
+
   methods: {
     newPost() {
       this.$store.commit('newPost');
+    },
+
+    viewPost(post, index) {
+      this.$store.commit('viewPost', {
+        post,
+        index,
+      });
     },
 
     editPost(post, index) {
@@ -119,7 +135,7 @@ export default {
 
     deletePost(post, index) {
       this.$store.commit('openConfirmDialog', {
-        title: 'Ar tikrai norite trinti šį skelbimą',
+        title: 'Ar tikrai norite trinti šį skelbimą?',
       });
       this.$eventBus.$on('confirmDialogClosed', (confirmed) => {
         if (confirmed) {
@@ -134,6 +150,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

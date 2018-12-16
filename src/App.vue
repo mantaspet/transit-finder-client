@@ -19,20 +19,20 @@
       :action="$store.getters.snackbar.action"
       :timeout="$store.getters.snackbar.timeout"
     />
-    <v-content>
-      <v-img
-        :src="require('@/assets/login-bg.png')"
-        height="100%"
-        width="100%"
-        style="position: fixed; text-align: center"
-      >
+    <v-img
+      :src="require('@/assets/login-bg.png')"
+      height="100%"
+      width="100%"
+      style="position: fixed; text-align: center"
+    >
+      <v-content>
         <v-container class="pa-0 mx-0" fluid>
           <v-slide-y-transition mode="out-in">
             <router-view :key="$route.fullPath"/>
           </v-slide-y-transition>
         </v-container>
-      </v-img>
-    </v-content>
+      </v-content>
+    </v-img>
   </v-app>
 </template>
 
@@ -71,6 +71,12 @@ export default {
 <style>
 html {
   overflow-y: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .v-toolbar__title {
+    font-size: 16px !important;
+  }
 }
 
 .v-subheader {

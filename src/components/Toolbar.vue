@@ -4,11 +4,7 @@
     <v-toolbar-title>Tarpmiestinės kelionės</v-toolbar-title>
     <v-spacer></v-spacer>
 
-    <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat @click="$router.push('/')">
-        <v-icon class="mr-2">directions_car</v-icon>Kelionės
-      </v-btn>
-
+    <v-toolbar-items>
       <v-btn v-if="$store.getters.currentUser" flat @click="logout">
         <v-icon class="mr-2">exit_to_app</v-icon>Atsijungti
       </v-btn>

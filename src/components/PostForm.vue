@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable max-len -->
   <v-card>
     <form @submit.prevent="createPost">
       <v-card-title class="title">{{ formTitle }}</v-card-title>
@@ -101,6 +102,7 @@
 </template>
 
 <script>
+/* eslint-disable no-underscore-dangle,no-restricted-globals */
 import { mapState } from 'vuex';
 import formMixin from '../mixins/form-mixin';
 
@@ -115,15 +117,13 @@ export default {
     };
   },
 
-  computed: {},
-
   computed: {
     formTitle() {
-      return this.index === -1 ? 'Nauja kelionė' : 'Kelionės redagavimas';
+      return this.index === -1 ? 'Naujas skelbimas' : 'Skelbimo redagavimas';
     },
 
     ...mapState({
-      backendErrors: (state) => state.posts.backendErrors,
+      backendErrors: state => state.posts.backendErrors,
     }),
   },
 
@@ -160,12 +160,10 @@ export default {
             day = '01';
           }
           return `${year}-${month}-${day}`;
-        } else {
-          return null;
         }
-      } else {
         return null;
       }
+      return null;
     },
 
     clearErrors(field) {

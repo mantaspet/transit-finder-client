@@ -14,7 +14,7 @@ export default new Router({
       component: Transits,
     },
     {
-      path: '/transits/:id',
+      path: '/posts/:id',
       component: Transit,
     },
     {
