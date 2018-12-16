@@ -50,7 +50,9 @@ export default new Vuex.Store({
       const appSettings = {
         sidenavOpen: payload.sidenavOpen === false ? payload.sidenavOpen : true,
         locale: payload.locale ? payload.locale : 'lt',
-        localeIcon: payload.localeIcon ? payload.localeIcon : require('@/assets/locale/lt-flag.png'),
+        localeIcon: payload.localeIcon
+          ? payload.localeIcon
+          : require('@/assets/locale/lt-flag.png'),
       };
       Vue.set(state, 'appSettings', appSettings);
       localStorage.setItem('appSettings', JSON.stringify(state.appSettings));

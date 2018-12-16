@@ -7,18 +7,8 @@
       </div>
       <v-card-actions>
         <v-spacer/>
-        <v-btn
-          color="primary"
-          flat
-          @click.native="onCancel">
-          {{ cancelText }}
-        </v-btn>
-        <v-btn
-          color="primary"
-          autofocus
-          @click.native="onConfirm">
-          {{ confirmText }}
-        </v-btn>
+        <v-btn color="primary" flat @click.native="onCancel">{{ cancelText }}</v-btn>
+        <v-btn color="primary" autofocus @click.native="onConfirm">{{ confirmText }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

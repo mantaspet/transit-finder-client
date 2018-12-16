@@ -6,13 +6,15 @@
       append-icon="attach_file"
       :label="label"
       name="file"
-      @click.native="onFocus"/>
+      @click.native="onFocus"
+    />
     <input
       ref="fileInput"
       :accept="fileFormats"
       type="file"
       :multiple="multiple"
-      @change="onFileChange">
+      @change="onFileChange"
+    >
   </div>
 </template>
 
@@ -93,8 +95,8 @@ export default {
 </script>
 
 <style scoped>
-  input[type=file] {
-    position: absolute;
-    left: -99999px;
-  }
+input[type='file'] {
+  position: absolute;
+  left: -99999px;
+}
 </style>

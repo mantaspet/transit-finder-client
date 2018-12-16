@@ -1,17 +1,7 @@
 <template>
-  <v-snackbar
-    v-model="$store.state.snackbar.isOpen"
-    :timeout="timeout"
-    auto-height
-    bottom
-  >
+  <v-snackbar v-model="$store.state.snackbar.isOpen" :timeout="timeout" auto-height bottom>
     {{ text }}
-    <v-btn
-      color="primary"
-      flat
-      @click.stop.prevent="onSnackbarActionClick">
-      {{ action }}
-    </v-btn>
+    <v-btn color="primary" flat @click.stop.prevent="onSnackbarActionClick">{{ action }}</v-btn>
   </v-snackbar>
 </template>
 

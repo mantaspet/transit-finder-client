@@ -22,35 +22,41 @@ export default {
 
   login({ commit, dispatch }, authData) {
     commit('showProgressBar');
-    axios.post('oauth/token', {
-      scope: process.env.VUE_APP_SCOPE,
-      grant_type: process.env.VUE_APP_GRANT_TYPE,
-      client_id: process.env.VUE_APP_CLIENT_ID,
-      client_secret: process.env.VUE_APP_CLIENT_SECRET,
-      username: authData.username,
-      password: authData.password,
-    }).then((res) => {
-      dispatch('handleAuthData', res.data);
-    }).finally(() => {
-      commit('hideProgressBar');
-    });
+    axios
+      .post('oauth/token', {
+        scope: process.env.VUE_APP_SCOPE,
+        grant_type: process.env.VUE_APP_GRANT_TYPE,
+        client_id: process.env.VUE_APP_CLIENT_ID,
+        client_secret: process.env.VUE_APP_CLIENT_SECRET,
+        username: authData.username,
+        password: authData.password,
+      })
+      .then((res) => {
+        dispatch('handleAuthData', res.data);
+      })
+      .finally(() => {
+        commit('hideProgressBar');
+      });
   },
 
   refreshToken({ commit, dispatch }, refreshToken) {
-    axios.post('oauth/token', {
-      scope: process.env.VUE_APP_SCOPE,
-      grant_type: 'refresh_token',
-      client_id: process.env.VUE_APP_CLIENT_ID,
-      client_secret: process.env.VUE_APP_CLIENT_SECRET,
-      refresh_token: refreshToken,
-    }).then((res) => {
-      dispatch('handleAuthData', res.data);
-    }).catch(() => {
-      commit('openSnackbar', {
-        text: 'Pasibaigė prieigos rakto galiojimo laikas. Prašome prisijungti iš naujo.',
+    axios
+      .post('oauth/token', {
+        scope: process.env.VUE_APP_SCOPE,
+        grant_type: 'refresh_token',
+        client_id: process.env.VUE_APP_CLIENT_ID,
+        client_secret: process.env.VUE_APP_CLIENT_SECRET,
+        refresh_token: refreshToken,
+      })
+      .then((res) => {
+        dispatch('handleAuthData', res.data);
+      })
+      .catch(() => {
+        commit('openSnackbar', {
+          text: 'Pasibaigė prieigos rakto galiojimo laikas. Prašome prisijungti iš naujo.',
+        });
+        commit('logout');
       });
-      commit('logout');
-    });
   },
 
   tryAutoLogin({ commit, dispatch }) {

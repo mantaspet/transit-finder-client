@@ -1,8 +1,6 @@
 <template>
   <v-layout wrap>
-    <v-flex
-      :class="{'ma-3': $vuetify.breakpoint.smAndUp}"
-      xs12 sm6 lg5>
+    <v-flex :class="{'ma-3': $vuetify.breakpoint.smAndUp}" xs12 sm6 lg5>
       <v-card class="darker-card">
         <PasswordChangeForm/>
       </v-card>

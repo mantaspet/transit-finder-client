@@ -1,0 +1,7 @@
+{
+  "extends": ["airbnb", "prettier", "plugin:vue/essential", "@vue/airbnb"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"]
+  }
+}

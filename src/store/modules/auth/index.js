@@ -17,9 +17,9 @@ const getters = {
 
   isAuthenticated(state) {
     const now = new Date();
-    return state.accessToken &&
-      state.tokenExpiresAt &&
-      now.getTime() < state.tokenExpiresAt.getTime();
+    return (
+      state.accessToken && state.tokenExpiresAt && now.getTime() < state.tokenExpiresAt.getTime()
+    );
   },
 
   impersonatingAs(state) {

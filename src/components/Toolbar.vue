@@ -4,10 +4,7 @@
     <v-spacer></v-spacer>
 
     <LanguageSelector/>
-    <v-menu
-      bottom
-      lazy
-      offset-y>
+    <v-menu bottom lazy offset-y>
       <v-btn slot="activator" icon large>
         <v-icon large>account_circle</v-icon>
       </v-btn>
@@ -15,9 +12,10 @@
       <v-list class="pa-0">
         <template v-if="$store.getters.auth.currentUser">
           <v-list-tile>
-            <v-subheader class="pa-0" style="margin: 0 auto">
-              {{ $store.getters.auth.currentUser.email }}
-            </v-subheader>
+            <v-subheader
+              class="pa-0"
+              style="margin: 0 auto"
+            >{{ $store.getters.auth.currentUser.email }}</v-subheader>
           </v-list-tile>
         </template>
         <v-divider></v-divider>
@@ -88,7 +86,7 @@ export default {
 </script>
 
 <style scoped>
-  .v-list__tile__action {
-    min-width: 32px;
-  }
+.v-list__tile__action {
+  min-width: 32px;
+}
 </style>

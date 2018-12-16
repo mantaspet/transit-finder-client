@@ -1,8 +1,6 @@
 <template>
   <v-card class="elevation-0">
-    <v-card-title class="title pb-0">
-      {{ $t('password_change') }}
-    </v-card-title>
+    <v-card-title class="title pb-0">{{ $t('password_change') }}</v-card-title>
     <v-form @submit.prevent>
       <v-card-text>
         <v-layout wrap>
@@ -46,9 +44,7 @@
           color="primary"
           type="submit"
           @click.native="changePassword"
-        >
-          {{ $t('save') }}
-        </v-btn>
+        >{{ $t('save') }}</v-btn>
       </v-card-actions>
     </v-form>
   </v-card>
@@ -83,16 +79,19 @@ export default {
       this.$validator.validate().then((passed) => {
         if (passed) {
           this.requestPending = true;
-          this.$http.put('api/user/current/password', this.passwords).then(() => {
-            this.$store.commit('openSnackbar', {
-              text: this.$t('password_was_changed'),
+          this.$http
+            .put('api/user/current/password', this.passwords)
+            .then(() => {
+              this.$store.commit('openSnackbar', {
+                text: this.$t('password_was_changed'),
+              });
+              this.passwords.current_password = '';
+              this.passwords.new_password = '';
+              this.requestPending = false;
+            })
+            .catch((error) => {
+              this.handleBackendErrors(error);
             });
-            this.passwords.current_password = '';
-            this.passwords.new_password = '';
-            this.requestPending = false;
-          }).catch((error) => {
-            this.handleBackendErrors(error);
-          });
         }
       });
     },

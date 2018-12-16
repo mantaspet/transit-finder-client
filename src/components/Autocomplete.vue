@@ -18,7 +18,8 @@
     hide-no-data
     @click:append="appendedIconClicked"
     @input="emitData"
-    @keyup="typing = true"/>
+    @keyup="typing = true"
+  />
 </template>
 
 <script>

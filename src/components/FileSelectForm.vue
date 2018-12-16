@@ -14,7 +14,8 @@
                 :multiple="false"
                 :fileFormats="allowedFileFormats"
                 :errorMessages="backendErrors.file"
-                @fileSelected="setFile"/>
+                @fileSelected="setFile"
+              />
             </v-flex>
           </v-layout>
         </v-container>
@@ -22,18 +23,12 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn
-        color="primary"
-        flat
-        @click.native="close">
-        {{ $t('cancel') }}
-      </v-btn>
+      <v-btn color="primary" flat @click.native="close">{{ $t('cancel') }}</v-btn>
       <v-btn
         color="primary"
         @click.native="uploadFile"
-        :disabled="requestPending">
-        {{ $t('upload') }}
-      </v-btn>
+        :disabled="requestPending"
+      >{{ $t('upload') }}</v-btn>
     </v-card-actions>
   </v-card>
 </template>

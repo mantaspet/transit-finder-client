@@ -1,14 +1,14 @@
 <template>
+  <!-- eslint-disable max-len -->
   <v-data-table
     :headers="headers"
     :loading="isLoading"
     :items="items"
     disable-initial-sort
-    hide-actions>
+    hide-actions
+  >
     <template slot="headers" slot-scope="props">
-      <th class="text-xs-left">
-        {{ headers[0].text }}
-      </th>
+      <th class="text-xs-left">{{ headers[0].text }}</th>
       <template v-if="$vuetify.breakpoint.smAndUp">
         <th class="text-xs-right">{{ headers[1].text }}</th>
         <th class="text-xs-right">{{ headers[2].text }}</th>
@@ -25,7 +25,8 @@
       <tr
         class="table-row clickable"
         :style="{'background': props.item.status !== 'active' ? 'lightgray' : ''}"
-        @click="editItem(props.item, props.index)">
+        @click="editItem(props.item, props.index)"
+      >
         <td>
           <v-layout align-center>
             <v-flex v-if="$vuetify.breakpoint.smAndDown" xs1>
@@ -33,15 +34,12 @@
                 icon
                 class="mx-0"
                 style="right: 14px"
-                @click.stop="props.expanded = !props.expanded">
-                <v-icon>
-                  {{ props.expanded ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }}
-                </v-icon>
+                @click.stop="props.expanded = !props.expanded"
+              >
+                <v-icon>{{ props.expanded ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }}</v-icon>
               </v-btn>
             </v-flex>
-            <v-flex>
-              {{ props.item.person.full_name }}
-            </v-flex>
+            <v-flex>{{ props.item.person.full_name }}</v-flex>
           </v-layout>
         </td>
         <template v-if="$vuetify.breakpoint.smAndUp">
@@ -55,31 +53,21 @@
               :color="props.item.role === 'admin' ? 'primary' : 'grey lighten-1'"
               text-color="white"
               label
-              small>
-              {{ $t(`roles.${props.item.role}`) }}
-            </v-chip>
+              small
+            >{{ $t(`roles.${props.item.role}`) }}</v-chip>
           </td>
           <td class="text-xs-right">
             <v-chip
               :color="props.item.status === 'suspended' ? 'red' : 'primary'"
               text-color="white"
               label
-              small>
-              {{ $t(`statuses.${props.item.status}`) }}
-            </v-chip>
+              small
+            >{{ $t(`statuses.${props.item.status}`) }}</v-chip>
           </td>
         </template>
         <td v-if="$store.getters.isTouchDevice" class="text-xs-right" style="padding: 0 14px">
-          <v-menu
-            slot="activator"
-            bottom
-            lazy
-            offset-y
-            @click.native.stop>
-            <v-btn
-              slot="activator"
-              icon
-              class="mx-0">
+          <v-menu slot="activator" bottom lazy offset-y @click.native.stop>
+            <v-btn slot="activator" icon class="mx-0">
               <v-icon>more_vert</v-icon>
             </v-btn>
             <v-list>
@@ -87,38 +75,26 @@
                 <v-list-tile-action>
                   <v-icon>people</v-icon>
                 </v-list-tile-action>
-                <v-list-tile-title>
-                  {{ $t('impersonate') }}
-                </v-list-tile-title>
+                <v-list-tile-title>{{ $t('impersonate') }}</v-list-tile-title>
               </v-list-tile>
               <v-list-tile @click="resetPassword(props.item.id)">
                 <v-list-tile-action>
                   <v-icon>refresh</v-icon>
                 </v-list-tile-action>
-                <v-list-tile-title>
-                  {{ $t('reset_password') }}
-                </v-list-tile-title>
+                <v-list-tile-title>{{ $t('reset_password') }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
         </td>
         <div v-else class="row-actions">
           <v-tooltip bottom lazy>
-            <v-btn
-              slot="activator"
-              icon
-              class="mx-0"
-              @click.stop="impersonateUser(props.item.id)">
+            <v-btn slot="activator" icon class="mx-0" @click.stop="impersonateUser(props.item.id)">
               <v-icon>people</v-icon>
             </v-btn>
             <span>{{ $t('impersonate') }}</span>
           </v-tooltip>
           <v-tooltip bottom lazy>
-            <v-btn
-              slot="activator"
-              icon
-              class="mx-0"
-              @click.stop="resetPassword(props.item.id)">
+            <v-btn slot="activator" icon class="mx-0" @click.stop="resetPassword(props.item.id)">
               <v-icon>refresh</v-icon>
             </v-btn>
             <span>{{ $t('reset_password' )}}</span>
@@ -131,7 +107,8 @@
       <div
         :style="{'background-color': props.index % 2 === 0 ? '#E0E0E0' : 'inherit'}"
         class="pa-3 clickable"
-        @click="editItem(props.item, props.index)">
+        @click="editItem(props.item, props.index)"
+      >
         <template v-if="$vuetify.breakpoint.xsOnly">
           <v-layout justify-space-between align-center>
             <strong>{{ headers[1].text }}:</strong>
@@ -157,9 +134,8 @@
                 :color="props.item.role === 'admin' ? 'primary' : 'grey lighten-1'"
                 text-color="white"
                 label
-                small>
-                {{ $t(`roles.${props.item.role}`) }}
-              </v-chip>
+                small
+              >{{ $t(`roles.${props.item.role}`) }}</v-chip>
             </span>
           </v-layout>
           <v-divider/>
@@ -170,9 +146,8 @@
                 :color="props.item.status === 'suspended' ? 'red' : 'primary'"
                 text-color="white"
                 label
-                small>
-                {{ $t(`statuses.${props.item.status}`) }}
-              </v-chip>
+                small
+              >{{ $t(`statuses.${props.item.status}`) }}</v-chip>
             </span>
           </v-layout>
         </template>

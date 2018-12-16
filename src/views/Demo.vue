@@ -5,20 +5,12 @@
         <h2>
           {{ $t('demo') }}
           <v-tooltip bottom lazy>
-            <v-btn
-              slot="activator"
-              icon
-              class="mx-0"
-              @click.stop="uploadFile">
+            <v-btn slot="activator" icon class="mx-0" @click.stop="uploadFile">
               <v-icon>file_upload</v-icon>
             </v-btn>
             <span>{{ $t('upload_file' )}}</span>
           </v-tooltip>
-          <v-btn
-            slot="activator"
-            icon
-            class="mx-0"
-            @click.stop>
+          <v-btn slot="activator" icon class="mx-0" @click.stop>
             <v-icon>file_download</v-icon>
           </v-btn>
         </h2>
@@ -31,22 +23,20 @@
           :prepended-icon="'person'"
           text-field="full_name"
           clearable
-          @itemSelected="userSelected"/>
+          @itemSelected="userSelected"
+        />
       </v-flex>
       <v-flex class="px-3" xs12 sm6 lg3>
         <v-text-field
           v-model="searchText"
           :label="$t('search')"
           prepend-inner-icon="search"
-          @input="searchTextChanged"/>
+          @input="searchTextChanged"
+        />
       </v-flex>
     </v-layout>
 
-    <UserList
-      :items="items"
-      :is-loading="isLoading"
-      @edit="editItem"
-      @delete="deleteItem"/>
+    <UserList :items="items" :is-loading="isLoading" @edit="editItem" @delete="deleteItem"/>
 
     <div v-if="pageCount > 1" class="text-xs-center">
       <v-pagination
@@ -55,7 +45,8 @@
         class="pt-3"
         :total-visible="$vuetify.breakpoint.smAndDown ? 5 : 7"
         circle
-        @input="getPaginatedItems(filterParams, $event)"/>
+        @input="getPaginatedItems(filterParams, $event)"
+      />
     </div>
 
     <v-dialog
@@ -64,23 +55,17 @@
       max-width="800px"
       lazy
       scrollable
-      persistent>
+      persistent
+    >
       <FileSelectForm
         :dialog="fileUploadDialog"
         @fileUploaded="fileUploaded"
-        @dialogClosed="fileUploadDialog = false"/>
+        @dialogClosed="fileUploadDialog = false"
+      />
     </v-dialog>
 
     <v-scale-transition origin="center">
-      <v-btn
-        v-if="showPrimaryBtn"
-        fab
-        bottom
-        right
-        color="primary"
-        dark
-        fixed
-        @click.stop>
+      <v-btn v-if="showPrimaryBtn" fab bottom right color="primary" dark fixed @click.stop>
         <v-icon>add</v-icon>
       </v-btn>
     </v-scale-transition>

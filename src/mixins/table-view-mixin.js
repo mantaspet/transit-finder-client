@@ -22,25 +22,31 @@ export default {
 
   methods: {
     getItems(filterParams) {
-      this.$http.get(`${this.apiRoute}?${filterParams}`).then((res) => {
-        this.items = res.data;
-      }).finally(() => {
-        this.isLoading = false;
-      });
+      this.$http
+        .get(`${this.apiRoute}?${filterParams}`)
+        .then((res) => {
+          this.items = res.data;
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
     },
 
     getPaginatedItems(filterParams, page) {
-      this.$http.get(`${this.apiRoute}?page=${page}&${filterParams}`).then((res) => {
-        this.pageCount = res.data.last_page;
-        this.page = res.data.current_page;
-        this.items = res.data.data;
-        this.$vuetify.goTo(0, {
-          duration: 900,
-          easing: 'easeOutQuint',
+      this.$http
+        .get(`${this.apiRoute}?page=${page}&${filterParams}`)
+        .then((res) => {
+          this.pageCount = res.data.last_page;
+          this.page = res.data.current_page;
+          this.items = res.data.data;
+          this.$vuetify.goTo(0, {
+            duration: 900,
+            easing: 'easeOutQuint',
+          });
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
-      }).finally(() => {
-        this.isLoading = false;
-      });
     },
 
     // filterUpdated(filterParams) {

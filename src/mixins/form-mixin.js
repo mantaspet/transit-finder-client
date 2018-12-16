@@ -30,17 +30,23 @@ export default {
         if (passed) {
           this.requestPending = true;
           if (this.index > -1) {
-            this.$http.put(`${apiRoute}${this.item.id}`, this.item).then((res) => {
-              this.$emit('itemUpdated', res.data);
-            }).catch((error) => {
-              this.handleBackendErrors(error);
-            });
+            this.$http
+              .put(`${apiRoute}${this.item.id}`, this.item)
+              .then((res) => {
+                this.$emit('itemUpdated', res.data);
+              })
+              .catch((error) => {
+                this.handleBackendErrors(error);
+              });
           } else {
-            this.$http.post(`${apiRoute}`, this.item).then((res) => {
-              this.$emit('itemCreated', res.data);
-            }).catch((error) => {
-              this.handleBackendErrors(error);
-            });
+            this.$http
+              .post(`${apiRoute}`, this.item)
+              .then((res) => {
+                this.$emit('itemCreated', res.data);
+              })
+              .catch((error) => {
+                this.handleBackendErrors(error);
+              });
           }
         }
       });

@@ -1,18 +1,12 @@
 <template>
-  <v-menu
-    bottom
-    lazy
-    offset-y>
+  <v-menu bottom lazy offset-y>
     <v-btn slot="activator" flat>
       <v-img :src="$store.getters.appSettings.localeIcon" height="20" contain/>
       {{ $store.getters.appSettings.locale.toUpperCase() }}
     </v-btn>
 
     <v-list class="pa-0">
-      <v-list-tile
-        v-for="lang in languages"
-        :key="lang.locale"
-        @click="updateLocale(lang)">
+      <v-list-tile v-for="lang in languages" :key="lang.locale" @click="updateLocale(lang)">
         <v-list-tile-action>
           <v-img :src="lang.localeIcon" height="20" contain/>
         </v-list-tile-action>

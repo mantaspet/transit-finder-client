@@ -20,7 +20,8 @@
                 :label="$t('first_name')"
                 name="first_name"
                 autofocus
-                @blur="clearErrors('first_name')"/>
+                @blur="clearErrors('first_name')"
+              />
             </v-flex>
 
             <v-flex xs12 sm6>
@@ -33,7 +34,8 @@
                 ]"
                 :label="$t('last_name')"
                 name="last_name"
-                @blur="clearErrors('last_name')"/>
+                @blur="clearErrors('last_name')"
+              />
             </v-flex>
 
             <v-flex xs12 sm6>
@@ -43,7 +45,8 @@
                 :error-messages="[...backendErrors['person.email'], ...errors.collect('email')]"
                 :label="$t('email')"
                 name="email"
-                @blur="clearErrors('email')"/>
+                @blur="clearErrors('email')"
+              />
             </v-flex>
 
             <v-flex xs12 sm6>
@@ -52,7 +55,8 @@
                 :error-messages="backendErrors['person.phone']"
                 :label="$t('phone')"
                 name="phone"
-                @blur="clearErrors('phone')"/>
+                @blur="clearErrors('phone')"
+              />
             </v-flex>
 
             <v-flex xs12 sm6>
@@ -61,7 +65,8 @@
                 :error-messages="backendErrors['person.address']"
                 :label="$t('address')"
                 name="address"
-                @blur="clearErrors('address')"/>
+                @blur="clearErrors('address')"
+              />
             </v-flex>
 
             <v-flex xs12 sm6>
@@ -73,7 +78,8 @@
                 :error-messages="[...backendErrors['role'], ...errors.collect('role')]"
                 :label="$t('role')"
                 name="role"
-                @blur="clearErrors('role')"/>
+                @blur="clearErrors('role')"
+              />
             </v-flex>
 
             <v-flex xs12 sm6>
@@ -84,7 +90,8 @@
                 :error-messages="[...backendErrors['status'], ...errors.collect('status')]"
                 :label="$t('status')"
                 name="status"
-                @blur="clearErrors('status')"/>
+                @blur="clearErrors('status')"
+              />
             </v-flex>
           </v-layout>
         </v-container>
@@ -92,18 +99,12 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn
-        flat
-        color="primary"
-        @click.native="close">
-        {{ $t('cancel') }}
-      </v-btn>
+      <v-btn flat color="primary" @click.native="close">{{ $t('cancel') }}</v-btn>
       <v-btn
         :disabled="requestPending"
         color="primary"
-        @click.native="save(apiRoute)">
-        {{ $t('save') }}
-      </v-btn>
+        @click.native="save(apiRoute)"
+      >{{ $t('save') }}</v-btn>
     </v-card-actions>
   </v-card>
 </template>

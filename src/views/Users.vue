@@ -2,11 +2,7 @@
   <div class="full-width">
     <h2 class="pa-3">{{ $t('users') }}</h2>
 
-    <UserList
-      :items="items"
-      :is-loading="isLoading"
-      @edit="editItem"
-      @delete="deleteItem"/>
+    <UserList :items="items" :is-loading="isLoading" @edit="editItem" @delete="deleteItem"/>
 
     <div v-if="pageCount > 1" class="text-xs-center">
       <v-pagination
@@ -15,7 +11,8 @@
         class="pt-3"
         :total-visible="$vuetify.breakpoint.smAndDown ? 5 : 7"
         circle
-        @input="getPaginatedItems(filterParams, $event)"/>
+        @input="getPaginatedItems(filterParams, $event)"
+      />
     </div>
 
     <v-dialog
@@ -24,14 +21,16 @@
       max-width="800px"
       lazy
       scrollable
-      persistent>
+      persistent
+    >
       <UserForm
         :dialog="dialog"
         :index="editedIndex"
         :item="editedItem"
         @itemCreated="itemCreated"
         @itemUpdated="itemUpdated"
-        @dialogClosed="dialog = false"/>
+        @dialogClosed="dialog = false"
+      />
     </v-dialog>
 
     <v-scale-transition origin="center">
@@ -43,7 +42,8 @@
         color="primary"
         dark
         fixed
-        @click.stop="createItem(newItem)">
+        @click.stop="createItem(newItem)"
+      >
         <v-icon>add</v-icon>
       </v-btn>
     </v-scale-transition>
