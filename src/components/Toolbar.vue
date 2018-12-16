@@ -4,11 +4,15 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat>
+      <v-btn flat @click="$router.push('/')">
         <v-icon class="mr-2">directions_car</v-icon>Kelionės
       </v-btn>
 
-      <v-btn flat>
+      <v-btn v-if="$store.getters.currentUser" flat @click="logout">
+        <v-icon class="mr-2">exit_to_app</v-icon>Atsijungti
+      </v-btn>
+
+      <v-btn v-else flat @click="loginWithFacebook">
         <v-icon class="mr-2">person</v-icon>Prisijungti su Facebook
       </v-btn>
     </v-toolbar-items>
@@ -64,8 +68,14 @@ export default {
   },
 
   methods: {
+    loginWithFacebook() {
+      this.$store.dispatch('loginWithFacebook').then(() => {
+        console.log('User has been logged in');
+      });
+    },
+
     logout() {
-      this.$store.commit('logout');
+      this.$store.dispatch('logout');
     },
   },
 };

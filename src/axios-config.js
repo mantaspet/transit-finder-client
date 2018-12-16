@@ -1,25 +1,14 @@
 /* eslint-disable no-param-reassign,arrow-parens */
 import axios from 'axios';
 import store from './store/index';
-import router from './router/index';
 import i18n from './i18n/i18n-config';
 
 axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
 
 axios.interceptors.request.use((config) => {
   if (store.getters.isAuthenticated) {
-    config.headers.common.Authorization = `Bearer ${
-      store.getters.auth.accessToken
-    }`;
-  } else {
-    router.push({ name: 'login' });
+    config.headers.common['x-auth-token'] = store.getters.accessToken;
   }
-  if (store.getters.auth.impersonatingAs) {
-    config.headers.common['Impersonating-As'] = `${
-      store.getters.auth.impersonatingAs
-    }`;
-  }
-  config.headers.common.Locale = store.getters.appSettings.locale;
   return config;
 });
 
@@ -35,11 +24,10 @@ axios.interceptors.response.use(
           throw error;
         }
         case 401: {
-          if (error.response.data.error === 'invalid_credentials') {
-            store.commit(mutation, { text: i18n.t('invalid_credentials') });
-          } else {
-            store.dispatch('tryAutoLogin');
-          }
+          store.commit(mutation, {
+            text: 'Turite prisijungti, kad atliktumėte šį veiksmą',
+          });
+          store.dispatch('logout');
           throw error;
         }
         case 403: {

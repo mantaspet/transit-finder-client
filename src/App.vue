@@ -37,6 +37,7 @@
 </template>
 
 <script>
+/* eslint-disable no-undef */
 import Toolbar from './components/Toolbar.vue';
 import ConfirmDialog from './components/ConfirmDialog.vue';
 import Snackbar from './components/Snackbar.vue';
@@ -55,15 +56,14 @@ export default {
   },
 
   created() {
+    FB.init({
+      appId: process.env.VUE_APP_FACEBOOK_APP_ID,
+      status: false,
+      cookie: false,
+      xfbml: false,
+      version: 'v3.2',
+    });
     this.$store.dispatch('tryAutoLogin');
-    let settings = localStorage.getItem('appSettings');
-    if (settings) {
-      settings = JSON.parse(settings);
-      this.$store.commit('storeAppSettings', settings);
-      if (settings.locale) {
-        this.$i18n.locale = settings.locale;
-      }
-    }
   },
 };
 </script>
@@ -72,6 +72,10 @@ export default {
 html {
   overflow-y: auto;
 }
+
+/* .v-image__image--cover {
+  filter: brightness(75%);
+} */
 
 .container.fill-height {
   align-items: unset;

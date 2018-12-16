@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign,global-require,import/no-unresolved */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import auth from './modules/auth/index';
+import auth from './auth';
 import i18n from '../i18n/i18n-config';
 
 Vue.use(Vuex);
@@ -88,7 +88,7 @@ export default new Vuex.Store({
       state.snackbar = {
         isOpen: true,
         text: payload.text,
-        action: payload.action ? payload.action : i18n.t('close'),
+        action: payload.action,
         link: payload.link,
         timeout: payload.timeout,
       };
