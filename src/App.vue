@@ -26,7 +26,7 @@
         width="100%"
         style="position: fixed; text-align: center"
       >
-        <v-container class="pa-0 mx-0" fill-height fluid>
+        <v-container class="pa-0 mx-0" fluid>
           <v-slide-y-transition mode="out-in">
             <router-view :key="$route.fullPath"/>
           </v-slide-y-transition>
@@ -71,6 +71,11 @@ export default {
 <style>
 html {
   overflow-y: auto;
+}
+
+.v-subheader {
+  height: unset;
+  padding: 0;
 }
 
 /* .v-image__image--cover {

@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import auth from './auth';
+import posts from './posts';
 import i18n from '../i18n/i18n-config';
 
 Vue.use(Vuex);
@@ -65,6 +66,15 @@ export default new Vuex.Store({
       localStorage.setItem('appSettings', JSON.stringify(state.appSettings));
     },
 
+    storeErrors(state, payload) {
+      state.backendErrors = payload;
+      console.log(payload);
+      Object.keys(state.backendErrors).forEach((key) => {
+        //this.backendErrors[key] = [];
+      });
+      //state.backendErrors = payload;
+    },
+
     openConfirmDialog(state, payload) {
       if (!payload) {
         payload = {};
@@ -115,5 +125,6 @@ export default new Vuex.Store({
 
   modules: {
     auth,
+    posts,
   },
 });

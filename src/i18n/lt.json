@@ -60,7 +60,7 @@
   "too_many_requests": "Išsiųsta per daug užklausų. Pabandykite vėliau.",
   "internal_server_error": "Įvyko serverio klaida.",
   "unexpected_error": "Nenumatyta klaida.",
-  "required_field": "Šis laukas privalomas.",
+  "required_field": "Laukas privalomas.",
   "wrong_email": "Įveskite taisyklingą el. pašto adresą.",
   "no_entries": "Nėra įrašų"
 }

@@ -73,7 +73,7 @@ export default {
     },
 
     clearErrors(field) {
-      this.backendErrors[field] = [];
+      this.$store.commit('clearErrors', field);
     },
 
     handleBackendErrors(error) {
