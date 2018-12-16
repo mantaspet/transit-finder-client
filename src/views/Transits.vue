@@ -28,6 +28,15 @@
                 <v-subheader>Aprašymas:</v-subheader>
                 <span>{{ post.description }}</span>
               </v-card-text>
+              <v-card-actions v-if="$isCurrentUser(post.user._id)">
+                <v-spacer></v-spacer>
+                <v-btn icon @click="editPost(post, index)">
+                  <v-icon color="teal">edit</v-icon>
+                </v-btn>
+                <v-btn icon @click="deletePost(post, index)">
+                  <v-icon color="teal">delete</v-icon>
+                </v-btn>
+              </v-card-actions>
             </v-card>
           </v-hover>
         </v-flex>
@@ -99,6 +108,28 @@ export default {
   methods: {
     newPost() {
       this.$store.commit('newPost');
+    },
+
+    editPost(post, index) {
+      this.$store.commit('editPost', {
+        post,
+        index,
+      });
+    },
+
+    deletePost(post, index) {
+      this.$store.commit('openConfirmDialog', {
+        title: 'Ar tikrai norite trinti šį skelbimą',
+      });
+      this.$eventBus.$on('confirmDialogClosed', (confirmed) => {
+        if (confirmed) {
+          this.$store.dispatch('deletePost', {
+            post,
+            index,
+          });
+        }
+        this.$eventBus.$off('confirmDialogClosed');
+      });
     },
   },
 };

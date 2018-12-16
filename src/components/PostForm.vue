@@ -14,7 +14,7 @@
                   ...backendErrors['from'],
                   ...errors.collect('from')
                 ]"
-                label="Kelionės tikslas"
+                label="Kelionės pradžia"
                 name="from"
                 autofocus
                 @blur="clearErrors('from')"
@@ -29,7 +29,7 @@
                   ...backendErrors['to'],
                   ...errors.collect('to')
                 ]"
-                label="Kelionės pradžia"
+                label="Kelionės tikslas"
                 name="to"
                 @blur="clearErrors('to')"
               />
@@ -68,7 +68,6 @@
             <v-flex xs12 sm6>
               <v-text-field
                 v-model="item.price"
-                v-validate="'required'"
                 :error-messages="[
                   ...backendErrors['price'],
                   ...errors.collect('price')
